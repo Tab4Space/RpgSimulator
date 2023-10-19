@@ -22,21 +22,25 @@
 
 ### 프로젝트 세부 내용
 **1. 캐릭터 구현**
-* BaseCharacter 클래스(C++)에서 공통 기능을 구현한 후 Blueprint로 상속하여 스킬, 데미지 처리 등을 구현
+* BaseCharacter 클래스(C++)에서 공통 기능을 구현한 후 Blueprint로 상속해 세부 사항 구현
 * 공격 스킬은 모션에 맞춰 발동되도록 Anim Montage에 AnimNotify를 추가하고 Notify에서 캐릭터의 데미지 전달 함수를 호출하도록 구현
-
 <br/>
 
 **2. 컴포넌트 구현**
 * 각 플레이어 캐릭터와 보스 몬스터가 공용으로 사용할 수 있도록 스탯, 스킬, 상태, 전투, 기믹을 관리하는 Actor Component 단위로 구현
 * 새로운 캐릭터 또는 보스 몬스터를 만들거나 다른 유형의 Actor에서 사용할 수 있도록 기능 분리
+* StatComponent: 각 캐릭터와 보스 몬스터의 스탯(HP, 공격력, 크리티컬 확률 등) 관리
+* AbilityComponent: 각 캐릭터와 보스 몬스터가 사용하는 스킬 관리
+* StatusComponent: 각 캐릭터와 보스 몬스터의 상태(행동, CC, 버프 등) 관리
+* CombatComponent: 각 캐릭터와 보스 몬스터의 전투(데미지 전달) 관리
+* GimmickComponent: 보스 몬스터가 각 페이즈마다 사용하는 기믹 관리
 <br/>
 
 **3. 보스 몬스터 및 BT 기반 AI 구현**
+* BaseCharacter 클래스(C++)에서 공통 기능을 구현한 후 Blueprint로 상속해 세부 사항 구현
 * BT를 사용하여 전투 시나리오가 가능한 AI 기능 구현 (Blueprint)
 * 보스의 기본 스킬 4개와 기믹에 사용되는 특수 스킬 3개 구현
 <img src=./assets/Scenario.png>
-
 <br/>
 
 **4. 게임 시스템 구현**
@@ -47,7 +51,8 @@
 * Game Mode 구현 (C++)
     * 게임이 시작될 때, 캐릭터, 보스 몬스터, 게임 규칙을 Game Instance에서 파싱한 JSON & CSV 데이터를 사용해 초기화
     * 게임의 제한 시간, 리셋, 종료 등을 관리
-
+* Player Controller 구현 (C++)
+    * 키보드 & 마우스의 입력 처리 구현
 <br/>
 
 **5. 시뮬레이션 기능 구현**
